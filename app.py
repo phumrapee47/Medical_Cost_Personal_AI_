@@ -20,14 +20,11 @@ def index():
         data = fetch_data("insurance")
         df = pd.DataFrame(data)
         
-        # Example: Simple line chart using Plotly (passing to frontend)
+        # Pass all data to the frontend for advanced visual manipulations
         if not df.empty:
-            chart_data = {
-                "labels": df['age'].tolist() if 'age' in df.columns else [],
-                "values": df['charges'].tolist() if 'charges' in df.columns else []
-            }
+            chart_data = df.to_dict(orient='records')
         else:
-            chart_data = {"labels": [], "values": []}
+            chart_data = []
 
         return render_template('index.html', chart_data=json.dumps(chart_data))
     except Exception as e:
