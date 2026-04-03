@@ -24,10 +24,18 @@ def predict_insurance_charges(input_data):
     
     # We must convert strings into numbers manually since you didn't save the LabelEncoders 
     # when training on Colab. (LabelEncoder assigns alphabetically).
-    df["sex"] = df["sex"].map({"male": 1, "female": 0})
-    df["smoker"] = df["smoker"].map({"yes": 1, "no": 0})
-    df["region"] = df["region"].map({"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3})
+    if "sex" in df.columns:
+        df["sex"] = df["sex"].map({"male": 1, "female": 0})
+    if "smoker" in df.columns:
+        df["smoker"] = df["smoker"].map({"yes": 1, "no": 0})
+    if "region" in df.columns:
+        df["region"] = df["region"].map({"northeast": 0, "northwest": 1, "southeast": 2, "southwest": 3})
     
+    # Extract only the features the model was trained on
+    if hasattr(model, 'feature_names_in_'):
+        expected_features = model.feature_names_in_
+        df = df[expected_features]
+
     # Make prediction strictly using your model
     prediction = model.predict(df)
     return float(prediction[0])
