@@ -1,0 +1,9 @@
+flask
+supabase
+pandas
+numpy
+scikit-learn
+plotly
+python-dotenv
+openpyxl
+joblib

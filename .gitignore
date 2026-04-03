@@ -1,0 +1,19 @@
+# Environments
+.env
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.vscode/
+.idea/
+.gemini/
+
+# Models & Data (optional, uncomment if you don't want to push models or local data)
+# models/*.pkl
+# *.csv
